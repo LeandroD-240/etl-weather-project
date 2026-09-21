@@ -1,4 +1,5 @@
 import logging
+from src.logging_config import setup_logging
 from pathlib import Path
 
 from src.db import get_connection
@@ -20,8 +21,5 @@ def init_db() -> None:
 
 
 if __name__ == "__main__":
-    logging.basicConfig(
-        level=logging.INFO,
-        format="%(asctime)s %(levelname)s %(name)s: %(message)s",
-    )
+    setup_logging()
     init_db()

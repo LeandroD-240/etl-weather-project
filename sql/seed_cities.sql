@@ -1,3 +1,4 @@
+-- Insert target cities
 INSERT INTO dim_city (name, country_code, latitude, longitude, timezone) VALUES
     ('Santo Domingo',  'DO',  18.48610,  -69.93120,  'America/Santo_Domingo'),
     ('Punta Cana',     'DO',  18.58200,  -68.40550,  'America/Santo_Domingo'),
@@ -13,6 +14,7 @@ INSERT INTO dim_city (name, country_code, latitude, longitude, timezone) VALUES
     ('London',         'GB',  51.50740,  -0.12780,   'Europe/London'),
     ('Reykjavik',      'IS',  64.14660,  -21.94260,  'Atlantic/Reykjavik'),
     ('Athens',         'GR',  37.98380,  23.72750,   'Europe/Athens')
+-- Update, not duplicated
 ON CONFLICT (name, country_code) DO UPDATE SET
     latitude  = EXCLUDED.latitude,
     longitude = EXCLUDED.longitude,
