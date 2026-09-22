@@ -201,4 +201,4 @@ if __name__ == "__main__":
 
     for p in payloads:
         times = p.hourly["time"]
-        logger.info("%-15s %3d horas  %s -> %s", p.city.name, len(times), times[0], times[-1])
+        logger.info(f"{p.city.name} {len(times)} horas  {times[0]} -> {times[-1]}")
