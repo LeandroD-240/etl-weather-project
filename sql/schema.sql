@@ -21,6 +21,20 @@ CREATE TABLE IF NOT EXISTS fact_weather_hourly (
     PRIMARY KEY (city_id, observed_at)
 );
 
+-- Quarantine: rows that failed on the validation
+CREATE TABLE IF NOT EXISTS fact_weather_hourly_quarantine (
+    quarantine_id     BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    city_id           INT,
+    observed_at       TIMESTAMPTZ,
+    temperature_c     NUMERIC,
+    humidity_pct      NUMERIC,
+    precipitation_mm  NUMERIC,
+    wind_speed_kmh    NUMERIC,
+    rejection_reason  TEXT NOT NULL,
+    run_id            BIGINT REFERENCES etl_run_log (run_id),
+    quarantined_at    TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
 -- Logs for the pipeline
 CREATE TABLE IF NOT EXISTS etl_run_log (
     run_id         BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
